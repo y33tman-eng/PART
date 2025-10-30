@@ -43,7 +43,6 @@ def send_command(vehicle_connection, send_queue):
 if __name__ == "__main__":
     # sample send queue for testing
     vehicle_connection = mavutil.mavlink_connection('tcp:127.0.0.1:5762')
-    #vehicle_connection = mavutil.mavlink_connection('udp:127.0.0.1:14550')
     vehicle_connection.wait_heartbeat()
 
     send_queue = queue.Queue()
@@ -52,7 +51,6 @@ if __name__ == "__main__":
     send_queue.put(['Status Text', 'Starting test sequence'])
     send_queue.put(['Arm Vehicle'])
     send_queue.put(['Set Mode', 'GUIDED'])
-#    send_queue.put(['Set Mode', 'STABILIZE'])
 
     while not send_queue.empty():
         send_command(vehicle_connection, send_queue)
